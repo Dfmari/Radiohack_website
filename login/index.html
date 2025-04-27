@@ -52,7 +52,7 @@
             position: absolute;
             font-size: 24px;
             animation: fall linear infinite;
-            z-index: 0; /* Behind the container */
+            z-index: -1; /* Behind the container */
         }
 
         @keyframes fall {
@@ -84,9 +84,6 @@
             
             // Random size (20px to 32px)
             emoji.style.fontSize = Math.random() * 12 + 20 + "px";
-            
-            // Random opacity (0.5 to 1)
-            emoji.style.opacity = Math.random() * 0.5 + 0.5;
             
             document.body.appendChild(emoji);
             
