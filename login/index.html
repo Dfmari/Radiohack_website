@@ -15,6 +15,8 @@
             margin: 0;
             color: white;
             text-align: center;
+            overflow: hidden; /* Prevent scrollbars from emoji animation */
+            position: relative;
         }
         .container {
             padding: 2rem;
@@ -22,6 +24,7 @@
             border-radius: 16px;
             backdrop-filter: blur(10px);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            z-index: 1; /* Ensure content stays above emojis */
         }
         .telegram-btn {
             display: inline-block;
@@ -43,6 +46,20 @@
         .telegram-btn:active {
             transform: translateY(0);
         }
+
+        /* Falling Emoji Animation */
+        .emoji {
+            position: absolute;
+            font-size: 24px;
+            animation: fall linear infinite;
+            z-index: 0; /* Behind the container */
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+            }
+        }
     </style>
 </head>
 <body>
@@ -51,5 +68,36 @@
         <p>Click the button below to start chatting!</p>
         <a href="https://t.me/HAckgam3_bot" class="telegram-btn">Open Telegram Bot</a>
     </div>
+
+    <script>
+        // Create falling magnifying glass emojis
+        function createEmoji() {
+            const emoji = document.createElement("div");
+            emoji.innerHTML = "🔍";
+            emoji.className = "emoji";
+            
+            // Random horizontal position
+            emoji.style.left = Math.random() * 100 + "vw";
+            
+            // Random animation duration (3s to 8s)
+            emoji.style.animationDuration = Math.random() * 5 + 3 + "s";
+            
+            // Random size (20px to 32px)
+            emoji.style.fontSize = Math.random() * 12 + 20 + "px";
+            
+            // Random opacity (0.5 to 1)
+            emoji.style.opacity = Math.random() * 0.5 + 0.5;
+            
+            document.body.appendChild(emoji);
+            
+            // Remove emoji after animation completes
+            setTimeout(() => {
+                emoji.remove();
+            }, 8000);
+        }
+
+        // Generate emojis every 300ms
+        setInterval(createEmoji, 300);
+    </script>
 </body>
 </html>
