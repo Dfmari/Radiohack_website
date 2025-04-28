@@ -161,20 +161,26 @@
 
     <script>
       const urlParams = new URLSearchParams(window.location.search);
-      let uid = urlParams.get('uid');
-      function checkUID(uid) {
-        if (uid.match(/^[0-9]+$/) != null){ 
-        } else {
+      const uid = urlParams.get('uid');
+
+      // Validate UID and redirect if invalid
+      function validateUID(uid) {
+        // Check if UID exists and contains only numbers
+        if (!uid || !/^[0-9]+$/.test(uid)) {
           window.location.replace("https://radiohack-website.vercel.app/login");
-          throw('Inavlid uid')
+          return false;
         }
-        /*
-        SQL DATABASE ACTION
-    
-        отправляем uid в базу данных и по надобности создаём строку
-    
-        SQL DATABASE ACTION
-        */
+        return true;
+      }
+
+      // Usage - check before loading game
+      if (!validateUID(uid)) {
+        // Stop execution if invalid
+        throw new Error('Invalid UID - redirecting to login');
+      } else {
+        // Proceed with game load if valid
+        console.log("Valid UID:", uid);
+        // Your game initialization code here...
       }
 
       var container = document.querySelector("#unity-container");
