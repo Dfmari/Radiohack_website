@@ -164,7 +164,6 @@
       let uid = urlParams.get('uid');
       function checkUID(uid) {
         if (uid.match(/^[0-9]+$/) != null){ 
-          let numcheck = true;
         } else {
           throw('Inavlid uid')
         }
@@ -175,7 +174,6 @@
     
         SQL DATABASE ACTION
         */
-        return numcheck;
       }
       
       checkUID(uid);
