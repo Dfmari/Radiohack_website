@@ -160,6 +160,22 @@
     </div>
 
     <script>
+      const urlParams = new URLSearchParams(window.location.search);
+      let uid = urlParams.get('uid');
+      function checkUID(uid) {
+        if (uid.match(/^[0-9]+$/) != null){ 
+        } else {
+          window.location.replace("https://radiohack-website.vercel.app/login");
+          throw('Inavlid uid')
+        }
+        /*
+        SQL DATABASE ACTION
+    
+        отправляем uid в базу данных и по надобности создаём строку
+    
+        SQL DATABASE ACTION
+        */
+      }
 
       var container = document.querySelector("#unity-container");
       var canvas = document.querySelector("#unity-canvas");
